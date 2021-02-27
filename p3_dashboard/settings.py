@@ -4,7 +4,7 @@ from pathlib import Path
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY = os.path.join(BASE_DIR, 'sc_ky.txt')
-# with open('/home/sc_ky.txt') as f:
+# with open('/home/dashboard34/sc_ky.txt') as f:
 #    SECRET_KEY = f.read().strip()
 
 DEBUG = True
@@ -85,3 +85,6 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+
+LOGIN_REDIRECT_URL = '/'
+LOGOUT_REDIRECT_URL = '/'

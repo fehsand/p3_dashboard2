@@ -1,18 +1,6 @@
-<!DOCTYPE html>
-<html lang="tr">
-<head>
-    <meta charset="UTF-8">
-    <title>Dashboard</title>
-    <!-- Bootstrap core CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-</head>
-<body>
-<h1 class="text-center m-3 p-3">DASHBOARD2</h1>
-{% if user.is_authenticated %}
-<h1 class="text-center m-3 p-3">Ne yaptıkta ne bekliyorsun : ) İlerde olur İnş.</h1>
-<h1 class="text-center m-3 p-3">Amerikalıların meşhur bir sözü vardır : ))) <br>Bu işler o kadar kolay değil..:)</h1>
-<h1 class="text-center"><a href="{% url 'logout' %}" >Çıkış Yap</a></h1>
-{% else %}
+{% extends 'ruyatabirleri/temel_anasayfa.html' %}
+
+{% block content %}
 <div class="row my-5 mx-0 p-0">
     <div class="col-sm-2"></div>
     <div class="col-sm-8 m-0 p-0">
@@ -43,6 +31,7 @@
                     <div class="form-group mt-3">
                         <button class="btn-lg btn-dark mx-3 p-2 px-3 border-0" type="submit" name="save">GİRİŞ YAP</button>
                         <input type="hidden" name="next" value="{{ next }}" />
+                        <a class="m-0 p-0" href="{% url 'ruyatabirleri:register' %}">ÜYE OL</a> veya <a class="m-0 p-0" href="{% url 'password_reset' %}" >ŞİFRE AL</a>
                     </div>
                     <div class="form-group mt-3">
                         {% if form.errors %}
@@ -56,12 +45,4 @@
     </div>
     <div class="col-sm-2"></div>
 </div>
-{% endif %}
-<!-- Bootstrap core JavaScript
-================================================== -->
-<!-- Placed at the end of the document so the pages load faster-->
-<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
-</body>
-</html>
+{% endblock %}
