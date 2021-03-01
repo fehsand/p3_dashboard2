@@ -6,3 +6,4 @@ db.sqlite3
 /p3_dashboard/static
 .DS_Store
 /sc_key.txt
+/target
