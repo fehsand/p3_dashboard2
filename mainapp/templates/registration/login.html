@@ -1,4 +1,4 @@
-{% extends 'ruyatabirleri/temel_anasayfa.html' %}
+{% extends 'mainapp/zemin.html' %}
 
 {% block content %}
 <div class="row my-5 mx-0 p-0">
@@ -31,7 +31,7 @@
                     <div class="form-group mt-3">
                         <button class="btn-lg btn-dark mx-3 p-2 px-3 border-0" type="submit" name="save">GİRİŞ YAP</button>
                         <input type="hidden" name="next" value="{{ next }}" />
-                        <a class="m-0 p-0" href="{% url 'ruyatabirleri:register' %}">ÜYE OL</a> veya <a class="m-0 p-0" href="{% url 'password_reset' %}" >ŞİFRE AL</a>
+                        <a class="m-0 p-0" href=#>ÜYE OL</a> veya <a class="m-0 p-0" href=# >ŞİFRE AL</a>
                     </div>
                     <div class="form-group mt-3">
                         {% if form.errors %}

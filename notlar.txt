@@ -4,3 +4,31 @@ git add --all .
 git status
 git commit -m "Gelistirme."
 git push
+
+Mainpage
+<main role="main" class="m-0 p-0">
+    <div class="container mt-5 m-0 p-0 mx-auto w-50">
+        <h1 class="display-4 font-italic border-bottom box-shadow">Our Team</h1>
+    </div>
+    {% for member in members %}
+    <div class="container my-5 py-5">
+        <table class="table border-bottom">
+            <tbody>
+            <tr>
+                <th scope="row">Kullanıcı Adınız :</th>
+                <td>{{member.username}}</td>
+            </tr>
+            <tr>
+                <th scope="row">Eposta :</th>
+                <td>{{member.email}}</td>
+            </tr>
+            <tr>
+                <th scope="row">Üyelik Başlangıçı :</th>
+                <td>{{member.date_joined.day}}/{{member.date_joined.month}}/{{member.date_joined.year}}</td>
+            </tr>
+            </tbody>
+        </table>
+
+    </div>
+    {% endfor %}
+</main>
