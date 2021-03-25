@@ -5,16 +5,30 @@
     <title>Dashboard</title>
     <!-- Bootstrap core CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <style>
+
+    @media (min-width: 576px) {.baslik h1 { font-size: 2rem;} }
+
+    @media (min-width: 768px) {.baslik h1 { font-size: 3rem;} }
+
+    @media (min-width: 1000px) { .baslik h1 { font-size: 6rem;}}
+    </style>
 </head>
-<body>
-{% if user.is_authenticated %}
+<body class="m-0 p-0">
 <nav class="navbar navbar-expand-md navbar-light bg-white border-bottom box-shadow fixed-top">
-    <a class="navbar-brand" href="{% url 'mainapp:anasayfa'%}">DASHBOARD</a>
+    <a class="navbar-brand" href="{% url 'mainapp:anasayfa'%}">PIWs</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarsExampleDefault">
-        <ul class="navbar-nav mr-auto ">
+        <ul class="navbar-nav mx-auto">
+            <li class="nav-item ">
+                <a class="nav-link" href=#>Web Development</a>
+            </li>
+            <li class="nav-item ">
+                <a class="nav-link" href=#>SEO</a>
+            </li>
+            {% if user.is_superuser %}
             <li class="nav-item ">
                 <a class="nav-link" href="{% url 'mainapp:projects'%}">Projects</a>
             </li>
@@ -25,12 +39,19 @@
                 <a class="nav-link" href="{% url 'mainapp:members'%}">Our Members</a>
             </li>
             <li class="nav-item">
+                <a class="nav-link" href="{% url 'mainapp:customers'%}">Our Customers</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'mainapp:budget'%}">Budget</a>
+            </li>
+            <li class="nav-item">
                 <a class="nav-link" href="{% url 'mainapp:analysis'%}">Analysis</a>
             </li>
+            {% endif %}
         </ul>
         {% if user.is_authenticated %}
         <div class="dropdown">
-            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1"
+            <button class="btn btn-success dropdown-toggle" type="button" id="dropdownMenuButton1"
                     data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <i class="fa fa-user"></i> {{user.username}}</button>
             <div class="dropdown-menu dropdown-menu-left" aria-labelledby="dropdownMenuButton1">
@@ -39,62 +60,50 @@
             </div>
         </div>
         {% else %}
-        <a class="btn btn-outline-dark" href="{% url 'login' %}" >Log In</a>
+        <a class="btn btn-outline-success" href="{% url 'login' %}" >Log In</a>
         {% endif %}
     </div>
 </nav>
 {% block content %}
 {% endblock %}
-{% else %}
-<div class="row my-5 mx-0  p-5">
-    <div class="col-md-2"></div>
-    <div class="col-md-8 m-0 p-0">
-        <div class="row mt-5 m-0 p-0">
-            <div class="col-md-3"></div>
-            <div class="col-md-6 text-center">
-                <h1 class="display-4 font-italic border-bottom box-shadow">ENTRANCE</h1>
-            </div>
-            <div class="col-md-3"></div>
-        </div>
-        <div class="row my-5 mx-0 p-0">
-            <div class="col-md-3 m-0 p-0"></div>
-            <div class="col-md-6 m-0 p-0 text-center">
-                <form class="m-0 p-0" method="post" action="{% url 'login' %}">
-                    {% csrf_token %}
-                    <div class="form-group mt-3">
-                        <input class="form-control m-0" type="text" name="username" placeholder="Username">
-                        {% if form.errors %}
-                        <p class="lead m-0 p-0 text-danger">{{form.username.errors.as_text}}</p>
-                        {% endif %}
-                    </div>
-                    <div class="form-group mt-3">
-                        <input class="form-control m-0" type="password" name="password" placeholder="Password">
-                        {% if form.errors %}
-                        <p class="lead m-0 p-0 text-danger">{{form.password.errors.as_text}}</p>
-                        {% endif %}
-                    </div>
-                    <div class="form-group mt-3">
-                        <button class="btn-lg btn-dark mx-3 p-2 px-3 border-0" type="submit" name="save">Sign in</button>
-                        <input type="hidden" name="next" value="{{ next }}" />
-                    </div>
-                    <div class="form-group mt-3">
-                        {% if form.errors %}
-                        <p class="lead m-0 p-0 text-danger">{{form.errors.as_text}}</p>
-                        {% endif %}
-                    </div>
-                </form>
-            </div>
-            <div class="col-md-3 m-0 p-0"></div>
-        </div>
-    </div>
-    <div class="col-md-2"></div>
-</div>
-{% endif %}
 <!-- Bootstrap core JavaScript
 ================================================== -->
 <!-- Placed at the end of the document so the pages load faster-->
 <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+<!-- Graphs -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.min.js"></script>
+<script>
+      var ctx = document.getElementById("myChart");
+      var myChart = new Chart(ctx, {
+        type: 'line',
+        data: {
+          labels: ["January", "February", "March"],
+          datasets: [{
+            data: [4, 4, 4],
+            lineTension: 0,
+            backgroundColor: 'transparent',
+            borderColor: '#007bff',
+            borderWidth: 4,
+            pointBackgroundColor: '#007bff'
+          }]
+        },
+        options: {
+          scales: {
+            yAxes: [{
+              ticks: {
+                beginAtZero: false
+              }
+            }]
+          },
+          legend: {
+            display: false,
+          }
+        }
+      });
+</script>
+
 </body>
 </html>

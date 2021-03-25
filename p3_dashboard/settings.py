@@ -1,15 +1,17 @@
-import os
+# import os
 from pathlib import Path
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-SECRET_KEY = os.path.join(BASE_DIR, 'sc_ky.txt')
+# SECRET_KEY = os.path.join(BASE_DIR, 'sc_ky.txt')
 # with open('/home/dashboard34/sc_ky.txt') as f:
 #    SECRET_KEY = f.read().strip()
 
+SECRET_KEY = BASE_DIR / 'sc_key.txt'
+
 DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1', '.pythonanywhere.com', '.ruyatabirix.com', ]
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', '.pythonanywhere.com', '.ruyatabirix.com', ]
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -84,7 +86,9 @@ USE_L10N = True
 USE_TZ = True
 
 STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+# STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+
+STATIC_ROOT = BASE_DIR / 'static'
 
 LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/'

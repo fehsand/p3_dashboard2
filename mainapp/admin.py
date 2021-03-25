@@ -1,3 +1,6 @@
 from django.contrib import admin
+from .models import OurMembers3, OurCustomers2
 
-# Register your models here.
+
+admin.site.register(OurMembers3)
+admin.site.register(OurCustomers2)

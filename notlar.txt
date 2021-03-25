@@ -1,9 +1,153 @@
+        .deneme {  margin-bottom: 4rem; }
+        .deneme-caption {   bottom: 3rem;   z-index: 20; }
+        .deneme-caption h1 {  font-size: 1.5rem; }
+        .deneme-item {   height: 40rem;   background-color: #777;}
+        .deneme-item > img {   position: absolute;   top: 0;   left: 0;   max-width: 100%;   height: 40rem; }
+        @media (min-width: 40em) {
+        .deneme-caption p {margin-bottom: 1.25rem; font-size: 1.25rem; line-height: 1.4; }
+        .deneme-caption h1 {font-size: 3rem; }
+        .deneme-item > img {position: absolute;   top: 0;   left: 0;   min-width: 100%;   height: 40rem; }
+
+        .deneme2_label {  font-size: 2.5rem !important;}
+
+
+
+        @media (min-width: 768px) { ... }
+
+
+
+        @media (min-width: 1200px) { .deneme2_label {font-size: calc(1.375rem + 1.5vw) !important;}} }
+
+        @media (max-width: 1200px) {         }
+
+
+
+
+
+{% if user.is_authenticated %}
+{% else %}
+{% endif %}
+
+from django.db import models
+
+class Publisher(models.Model):
+    name = models.CharField(max_length=30)
+    address = models.CharField(max_length=50)
+    city = models.CharField(max_length=60)
+    state_province = models.CharField(max_length=30)
+    country = models.CharField(max_length=50)
+    website = models.URLField()
+
+class Author(models.Model):
+    first_name = models.CharField(max_length=30)
+    last_name = models.CharField(max_length=40)
+    email = models.EmailField()
+
+class Book(models.Model):
+    title = models.CharField(max_length=100)
+    authors = models.ManyToManyField(Author)
+    publisher = models.ForeignKey(Publisher)
+    publication_date = models.DateField()
+
+------------------------------------------------------------------
+
+from django.db import models
+
+class Publication(models.Model):
+    title = models.CharField(max_length=30)
+
+    class Meta:
+        ordering = ['title']
+
+    def __str__(self):
+        return self.title
+
+class Article(models.Model):
+    headline = models.CharField(max_length=100)
+    publications = models.ManyToManyField(Publication)
+
+    class Meta:
+        ordering = ['headline']
+
+    def __str__(self):
+        return self.headline
+
+------------------------------------------------------------------------
+
+from django.db import models
+
+class Person(models.Model):
+    name = models.CharField(max_length=128)
+
+    def __str__(self):
+        return self.name
+
+class Group(models.Model):
+    name = models.CharField(max_length=128)
+    members = models.ManyToManyField(Person, through='Membership')
+
+    def __str__(self):
+        return self.name
+
+class Membership(models.Model):
+    person = models.ForeignKey(Person, on_delete=models.CASCADE)
+    group = models.ForeignKey(Group, on_delete=models.CASCADE)
+    date_joined = models.DateField()
+    invite_reason = models.CharField(max_length=64)
+
+    ------------------------------------------------------------------
+
+from django.db import models
+
+class Place(models.Model):
+    name = models.CharField(max_length=50)
+    address = models.CharField(max_length=80)
+
+    def __str__(self):
+        return "%s the place" % self.name
+
+class Restaurant(models.Model):
+    place = models.OneToOneField(
+        Place,
+        on_delete=models.CASCADE,
+        primary_key=True,
+    )
+    serves_hot_dogs = models.BooleanField(default=False)
+    serves_pizza = models.BooleanField(default=False)
+
+    def __str__(self):
+        return "%s the restaurant" % self.place.name
+
+class Waiter(models.Model):
+    restaurant = models.ForeignKey(Restaurant, on_delete=models.CASCADE)
+    name = models.CharField(max_length=50)
+
+    def __str__(self):
+        return "%s the waiter at %s" % (self.name, self.restaurant)
+
+        -----------------------------------------------------------------------
+
+
+
+
+
 Github güncelleme:
 git status
 git add --all .
 git status
 git commit -m "Gelistirme."
 git push
+
+
+    <div class="row py-5 bg-secondary">
+        <div class="col-md-12 py-5">
+            <h1 class=" text-center py-5">Our Members</h1>
+            {% for item in items_members%}
+            <p class="bg-info text-center">{{item}}</p>
+            {%endfor%}
+        </div>
+    </div>
+
 
 Mainpage
 <main role="main" class="m-0 p-0">
@@ -32,3 +176,63 @@ Mainpage
     </div>
     {% endfor %}
 </main>
+
+
+// Extra small devices (portrait phones, less than 576px)
+// No media query for `xs` since this is the default in Bootstrap
+
+// Small devices (landscape phones, 576px and up)
+@media (min-width: 576px) { ... }
+
+// Medium devices (tablets, 768px and up)
+@media (min-width: 768px) { ... }
+
+// Large devices (desktops, 992px and up)
+@media (min-width: 992px) { ... }
+
+// Extra large devices (large desktops, 1200px and up)
+@media (min-width: 1200px) { ... }
+
+<div class="row my-5 mx-0  p-5">
+    <div class="col-md-2"></div>
+    <div class="col-md-8 m-0 p-0">
+        <div class="row mt-5 m-0 p-0">
+            <div class="col-md-3"></div>
+            <div class="col-md-6 text-center">
+                <h1 class="display-4 font-italic border-bottom box-shadow">ENTRANCE</h1>
+            </div>
+            <div class="col-md-3"></div>
+        </div>
+        <div class="row my-5 mx-0 p-0">
+            <div class="col-md-3 m-0 p-0"></div>
+            <div class="col-md-6 m-0 p-0 text-center">
+                <form class="m-0 p-0" method="post" action="{% url 'login' %}">
+                    {% csrf_token %}
+                    <div class="form-group mt-3">
+                        <input class="form-control m-0" type="text" name="username" placeholder="Username">
+                        {% if form.errors %}
+                        <p class="lead m-0 p-0 text-danger">{{form.username.errors.as_text}}</p>
+                        {% endif %}
+                    </div>
+                    <div class="form-group mt-3">
+                        <input class="form-control m-0" type="password" name="password" placeholder="Password">
+                        {% if form.errors %}
+                        <p class="lead m-0 p-0 text-danger">{{form.password.errors.as_text}}</p>
+                        {% endif %}
+                    </div>
+                    <div class="form-group mt-3">
+                        <button class="btn-lg btn-dark mx-3 p-2 px-3 border-0" type="submit" name="save">Sign in</button>
+                        <input type="hidden" name="next" value="{{ next }}" />
+                    </div>
+                    <div class="form-group mt-3">
+                        {% if form.errors %}
+                        <p class="lead m-0 p-0 text-danger">{{form.errors.as_text}}</p>
+                        {% endif %}
+                    </div>
+                </form>
+            </div>
+            <div class="col-md-3 m-0 p-0"></div>
+        </div>
+    </div>
+    <div class="col-md-2"></div>
+</div>
