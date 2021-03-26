@@ -37,6 +37,13 @@ class Projects (models.Model):
     project_is_ready = models.BooleanField(default=False)
     project_start_date = models.DateField(null=True, blank=True)
     project_end_date = models.DateField(blank=True)
+    project_price = models.CharField(null=True, max_length=250)
+    CURRENCY = (
+        ('TL', 'Turkish Lira'),
+        ('USD', 'US Dollar'),
+        ('EUR', 'Euro'),
+    )
+    project_currency = models.CharField(null=True, max_length=3, choices=CURRENCY)
     add_date = models.DateTimeField(auto_now_add=True)
     update_date = models.DateTimeField(auto_now=True)
 
