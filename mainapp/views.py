@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from .models import OurMembers3, OurCustomers2
+from .models import OurMembers3, OurCustomers2, Projects
 
 def anasayfa(request):
 
@@ -17,7 +17,9 @@ def members (request):
                                                     'pers_say':pers_say})
 
 def projects (request):
-    return render(request, 'mainapp/projects.html', {})
+    projs = Projects.objects.all()
+    projs_say = len(projs)
+    return render(request, 'mainapp/projects.html', {'projs':projs, 'projs_say':projs_say})
 
 def products (request):
     return render(request, 'mainapp/products.html', {})

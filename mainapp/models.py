@@ -27,3 +27,18 @@ class OurCustomers2 (models.Model):
 
     def __str__(self):
         return str(self.customer_name)
+
+class Projects (models.Model):
+    project_name = models.CharField(max_length=250)
+    project_manager = models.ForeignKey(OurMembers3, on_delete=models.CASCADE)
+    project_owner = models.ForeignKey(OurCustomers2, on_delete=models.CASCADE)
+    project_comment = models.TextField(blank=True)
+    project_w_address = models.URLField(blank=True)
+    project_is_ready = models.BooleanField(default=False)
+    project_start_date = models.DateField(null=True, blank=True)
+    project_end_date = models.DateField(blank=True)
+    add_date = models.DateTimeField(auto_now_add=True)
+    update_date = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return str(self.project_name)
