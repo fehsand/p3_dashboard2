@@ -2,8 +2,7 @@ from django.shortcuts import render
 from .models import OurMembers3, OurCustomers2, Projects
 
 def anasayfa(request):
-
-    return render(request, 'mainapp/anasayfa.html', {})
+    return render(request, 'mainapp/navbar.html', {})
 
 def hesap (request):
     return render(request, 'mainapp/hesap.html', {})
